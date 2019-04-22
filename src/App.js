@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+//import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
 
@@ -74,11 +75,17 @@ class App extends Component {
 
     // Lecture 47 - add styling to button
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer'
+/*       ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
+ */
     } 
 
     let persons = null;
@@ -97,22 +104,43 @@ class App extends Component {
           })}
         </div> 
       );
+
+      style.backgroundColor = 'red';
+/*       style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
+ */
     }
+
+    //let classes = ['red', 'bold'].join(' ');
+    let classes = [];
+    if(this.state.persons.length <= 2) {
+      classes.push('red');  //classes = ['red']
+    }
+    if(this.state.persons.length <= 1) {
+      classes.push('bold');  // classes = ['red', 'bold']
+    }
+
     // JSX Format
     //  Note:  className instead of class - class is a reserve word in React
     //      compiler will translate className to class in HTML DOM
     //  onClick - if you add () to function name, function will execute on page load
     // Lecture 44 - can pass down click handlers to children as a property
     //            - dynamically passing arguments
+    // Lecture 65 - basic class assignment
+    //        <p className={classes}>This is really working!</p>
+    // Lecture 68 - use Radium,       <StyleRoot>        </StyleRoot>
+
     return (
-      <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        {persons}
-      </div>
+        <div className="App">
+          <h1>Hi, I'm a React App</h1>
+          <p className={classes.join(' ')}>This is really working!</p>
+          <button 
+            style={style}
+            onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          {persons}
+        </div>
     );
 
     // Other React JavaScript formats for same code above
@@ -122,4 +150,5 @@ class App extends Component {
   }
 }
 
+//export default Radium(App);
 export default App;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+//Lecture 70 - adding class to import App.css
+//import './App.css';
+import classes from './App.css';
 //import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
@@ -74,21 +76,26 @@ class App extends Component {
   render() {
 
     // Lecture 47 - add styling to button
+    // Lecture 71 - removing style selector
+/*      
+
     const style = {
       backgroundColor: 'green',
       color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
-/*       ':hover': {
+      cursor: 'pointer',
+      ':hover': {
         backgroundColor: 'lightgreen',
         color: 'black'
       }
- */
     } 
+*/
 
     let persons = null;
+    // Lecture 71 - 
+    let btnClass = '';
 
     // Lecture 53 - turn into list
     if(this.state.showPersons) {
@@ -105,21 +112,30 @@ class App extends Component {
         </div> 
       );
 
-      style.backgroundColor = 'red';
+      // Lecture 71 - removing psuedo style selector
+      //style.backgroundColor = 'red';
 /*       style[':hover'] = {
         backgroundColor: 'salmon',
         color: 'black'
       }
  */
+      // Lecture 71 - new styling
+      btnClass = classes.Red;
     }
 
     //let classes = ['red', 'bold'].join(' ');
-    let classes = [];
+    // lecture 70 - name conflict with new import, changing classes to assignedClasses
+    //let classes = [];
+    const assignedClasses = [];
     if(this.state.persons.length <= 2) {
-      classes.push('red');  //classes = ['red']
+      // Lecture 70 - change to refer to classes as properties,not strings
+      //classes.push('red');  //classes = ['red']
+      assignedClasses.push(classes.red);
     }
     if(this.state.persons.length <= 1) {
-      classes.push('bold');  // classes = ['red', 'bold']
+      // Lecture 70 - change to refer to classes as properties,not strings
+      //classes.push('bold');  // classes = ['red', 'bold']
+      assignedClasses.push(classes.bold);
     }
 
     // JSX Format
@@ -133,11 +149,19 @@ class App extends Component {
     // Lecture 68 - use Radium,       <StyleRoot>        </StyleRoot>
 
     return (
-        <div className="App">
+        //Lecture 70; change className to class defined in import statement 
+        //<div className="App">
+
+        // Lecture 71 - Remove psuedo selector style 
+        //  <button 
+        // style = { style }
+        //            onClick = { this.togglePersonsHandler } > Toggle Persons</button >
+
+        <div className={classes.App}>
           <h1>Hi, I'm a React App</h1>
-          <p className={classes.join(' ')}>This is really working!</p>
-          <button 
-            style={style}
+          <p className={assignedClasses.join(' ')}>This is really working!</p>
+          <button
+            className={btnClass}
             onClick={this.togglePersonsHandler}>Toggle Persons</button>
           {persons}
         </div>

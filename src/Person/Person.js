@@ -6,7 +6,9 @@ import React from 'react';
 // to install Radium:
 //      npm install --save radium
 
-import './Person.css';
+// Lecture 70 - change to classes import
+//import './Person.css';
+import classes from './Person.css';
 
 // ES6 function code format
 // props - all attributes that are passed into function
@@ -17,7 +19,9 @@ const person = (props) => {
     //   <div className="Person" style={style}>
 
     return (
-        <div className="Person">
+        // Lecture 70 - change to class object name instead of string
+        //<div className="Person">
+        <div className={classes.Person}>
             <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
             <p>{props.children}</p>
             <input type="text" onChange={props.changed} value={props.name} />
